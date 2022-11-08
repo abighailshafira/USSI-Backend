@@ -14,4 +14,4 @@ app.use(cors());
 app.use("/api/v1", router);
 
 // listen on port
-app.listen(PORT, () => console.log("Server running at http://localhost:",PORT));
+app.listen(PORT, () => console.log("Server running at http://localhost:", PORT));
