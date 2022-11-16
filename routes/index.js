@@ -22,7 +22,7 @@ let upload = multer({ storage: storage });
 router.post("/register", register);
 router.post("/login", login);
 router.post("/logout", logout);
-router.post("/registration", upload.single("payment"), registration);
+router.post("/registration", registration);
 router.get("/training", getAllTraining);
 router.post("/training", createTraining);
 router.get("/detail/training", detailTraining);
