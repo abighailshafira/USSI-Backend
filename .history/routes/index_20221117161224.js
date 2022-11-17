@@ -3,7 +3,7 @@ const router = express.Router();
 const multer = require("multer");
 const { register, login, logout } = require("../controller/authController");
 const { registration } = require("../controller/registrationController");
-const { getAllTraining, createTraining, detailTraining, detailTrainingById } = require("../controller/trainingController");
+const { getAllTraining, createTraining, detailTraining } = require("../controller/trainingController");
 const { getAllEvent } = require("../controller/eventController");
 
 let storage = multer.diskStorage({

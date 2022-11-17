@@ -43,24 +43,4 @@ const detailTraining = async (req, res) => {
   }
 };
 
-const detailTrainingById = async (req, res) => {
-  const trainingId = req.params.id
-  try {
-    const detail = await DetailTraining.findOne({
-      where: {
-        id: trainingId
-      }
-    })
-    res.status(200).json({
-      message: 'Success get detail',
-      statusCode: 200,
-      data: detail
-    })
-  } catch (error) {
-    res.json({
-      message: error.message
-    })
-  }
-}
-
-module.exports = { getAllTraining, createTraining, detailTraining, detailTrainingById };
+module.exports = { getAllTraining, createTraining, detailTraining };
