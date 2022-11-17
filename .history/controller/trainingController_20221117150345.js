@@ -46,15 +46,29 @@ const detailTraining = async (req, res) => {
 const detailTrainingById = async (req, res) => {
   const trainingId = req.params.id
   try {
-    const detail = await DetailTraining.findOne({
+    const product = await DetailTraining.findOne({
+      include: {
+        // model: Profiles,
+        required: true,
+        attributes: [
+          'id',
+          "trainingName",
+          "description",
+          "startDate",
+          "endDate",
+          "location",
+          "city",
+          "img",
+        ]
+      },
       where: {
         id: trainingId
       }
     })
     res.status(200).json({
-      message: 'Success get detail',
+      message: 'Success get product',
       statusCode: 200,
-      data: detail
+      data: product
     })
   } catch (error) {
     res.json({
@@ -63,4 +77,4 @@ const detailTrainingById = async (req, res) => {
   }
 }
 
-module.exports = { getAllTraining, createTraining, detailTraining, detailTrainingById };
+module.exports = { getAllTraining, createTraining, detailTraining };

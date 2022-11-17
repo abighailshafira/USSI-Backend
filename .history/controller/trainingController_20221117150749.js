@@ -47,6 +47,20 @@ const detailTrainingById = async (req, res) => {
   const trainingId = req.params.id
   try {
     const detail = await DetailTraining.findOne({
+      // include: {
+      //   // model: Profiles,
+      //   required: true,
+      //   attributes: [
+      //     'id',
+      //     "trainingName",
+      //     "description",
+      //     "startDate",
+      //     "endDate",
+      //     "location",
+      //     "city",
+      //     "img",
+      //   ]
+      // },
       where: {
         id: trainingId
       }
