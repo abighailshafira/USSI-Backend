@@ -2,10 +2,9 @@ const { Institution } = require("../models");
 
 const getAllInstitution = async (req, res) => {
   try {
-    const institution = await Institution.findAll();
+    await Institution.findAll();
     res.status(200).json({
       message: "BISSSAAAA",
-      data: institution
     });
   } catch (error) {
     console.log(error);

@@ -31,7 +31,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       CPPhone: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       statusSLA: {
         type: Sequelize.INTEGER
