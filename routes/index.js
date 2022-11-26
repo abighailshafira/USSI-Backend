@@ -3,7 +3,7 @@ const router = express.Router();
 const multer = require("multer");
 const { register, login, logout } = require("../controller/authController");
 const { registration } = require("../controller/registrationController");
-const { getAllTraining, createTraining, detailTraining, detailTrainingById } = require("../controller/trainingController");
+const { getAllTraining, createTraining, detailTraining, detailTrainingById, updateTraining, deleteTraining } = require("../controller/trainingController");
 const { getAllEvent } = require("../controller/eventController");
 const { getAllInstitution, createInstitution, deleteInstitution, updateInstitution } = require("../controller/institutionController");
 
@@ -28,6 +28,8 @@ router.get("/training", getAllTraining);
 router.post("/training", createTraining);
 router.get("/detail/training", detailTraining);
 router.get("/detail/training/:id", detailTrainingById);
+router.put("/detail/training/:id", updateTraining);
+router.delete("/detail/training/:id", deleteTraining);
 router.get("/event", getAllEvent);
 router.get("/institution", getAllInstitution);
 router.post("/institution", createInstitution);

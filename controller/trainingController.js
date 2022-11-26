@@ -35,7 +35,7 @@ const detailTraining = async (req, res) => {
   try {
     const detail = await DetailTraining.findAll();
     res.status(200).json({
-      message: "BISSSAAAA",
+      message: "Success get detail",
       data: detail,
     });
   } catch (error) {
@@ -44,23 +44,65 @@ const detailTraining = async (req, res) => {
 };
 
 const detailTrainingById = async (req, res) => {
-  const trainingId = req.params.id
+  const trainingId = req.params.id;
   try {
     const detail = await DetailTraining.findOne({
       where: {
-        id: trainingId
-      }
-    })
+        id: trainingId,
+      },
+    });
     res.status(200).json({
-      message: 'Success get detail',
+      message: "Success get detail",
       statusCode: 200,
-      data: detail
-    })
+      data: detail,
+    });
   } catch (error) {
     res.json({
-      message: error.message
-    })
+      message: error.message,
+    });
   }
-}
+};
 
-module.exports = { getAllTraining, createTraining, detailTraining, detailTrainingById };
+const updateTraining = async (req, res) => {
+  const trainingId = req.params.id;
+  const { trainingName, description, startDate, endDate, location, city, img } = req.body;
+
+  try {
+    const training = await DetailTraining.findOne({
+      where: { id: trainingId },
+    });
+    await training.update({
+      trainingName,
+      description,
+      startDate,
+      endDate,
+      location,
+      city,
+      img,
+    });
+    res.status(200).json({
+      message: "Success update training",
+      statusCode: 200,
+    });
+  } catch (error) {
+    res.json({
+      message: error.message,
+    });
+  }
+};
+
+const deleteTraining = async (req, res) => {
+  try {
+    const trainingId = req.params.id;
+    await DetailTraining.destroy({
+      where: { id: trainingId },
+    });
+    res.status(204).end();
+  } catch (error) {
+    res.json({
+      message: error.message,
+    });
+  }
+};
+
+module.exports = { getAllTraining, createTraining, detailTraining, detailTrainingById, updateTraining, deleteTraining };
