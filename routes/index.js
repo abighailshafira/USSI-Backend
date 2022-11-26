@@ -5,7 +5,7 @@ const { register, login, logout } = require("../controller/authController");
 const { registration } = require("../controller/registrationController");
 const { getAllTraining, createTraining, detailTraining, detailTrainingById } = require("../controller/trainingController");
 const { getAllEvent } = require("../controller/eventController");
-const { getAllInstitution, createInstitution } = require("../controller/institutionController");
+const { getAllInstitution, createInstitution, deleteInstitution, updateInstitution } = require("../controller/institutionController");
 
 let storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -31,5 +31,7 @@ router.get("/detail/training/:id", detailTrainingById);
 router.get("/event", getAllEvent);
 router.get("/institution", getAllInstitution);
 router.post("/institution", createInstitution);
+router.delete("/institution/:id", deleteInstitution);
+router.put("/institution/:id", updateInstitution);
 
 module.exports = router;
