@@ -21,6 +21,9 @@ module.exports = {
       endDate: {
         type: Sequelize.DATE,
       },
+      time: {
+        type: Sequelize.STRING,
+      },
       location: {
         type: Sequelize.STRING,
       },
@@ -29,6 +32,9 @@ module.exports = {
       },
       img: {
         type: Sequelize.STRING,
+      },
+      registrationDate: {
+        type: Sequelize.DATE,
       },
       createdAt: {
         allowNull: false,

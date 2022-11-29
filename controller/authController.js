@@ -1,22 +1,79 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { User } = require("../models");
+const { User, Institution } = require("../models");
+const jwtDecode = require("jwt-decode");
 
 const register = async (req, res) => {
-  const { email, password, role } = req.body;
+  const { institutionId, name, email, password, role } = req.body;
   const salt = await bcrypt.genSalt();
   const hashPassword = await bcrypt.hash(password, salt);
   try {
     await User.create({
+      institutionId,
+      name,
       email,
       password: hashPassword,
-      role,
+      role: "member",
     });
     res.status(201).json({
-      message: "hello register berhasil ^^!",
+      message: "Register success",
     });
   } catch (error) {
     console.log(error);
+  }
+};
+
+const getAdmin = async (req, res) => {
+  try {
+    const admin = await User.findAll({
+      where: {
+        role: "admin",
+      },
+    });
+    res.status(200).json({
+      message: "Success get all admin",
+      data: admin,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const updateAdmin = async (req, res) => {
+  const userId = req.params.id;
+  const { name, email, password } = req.body;
+
+  try {
+    const admin = await User.findOne({
+      where: { id: userId },
+    });
+    await admin.update({
+      name,
+      email,
+      password,
+    });
+    res.status(200).json({
+      message: "Success update admin",
+      statusCode: 200,
+    });
+  } catch (error) {
+    res.json({
+      message: error.message,
+    });
+  }
+};
+
+const deleteAdmin = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    await User.destroy({
+      where: { id: userId },
+    });
+    res.status(204).end();
+  } catch (error) {
+    res.json({
+      message: error.message,
+    });
   }
 };
 
@@ -72,4 +129,24 @@ const isEmailRegistered = (value) => {
   });
 };
 
-module.exports = { register, login, logout };
+const getInstitution = async (req, res) => {
+  try {
+    const institution = await Institution.findOne({
+      include: {
+        model: User,
+        required: true,
+        where: {
+          id: req.params.id,
+        },
+      },
+    });
+    res.status(200).json({
+      message: "terserah",
+      data: institution,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { register, login, logout, getInstitution, getAdmin, updateAdmin, deleteAdmin };

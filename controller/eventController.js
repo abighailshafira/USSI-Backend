@@ -23,4 +23,19 @@ const getAllEvent = async (req, res) => {
   }
 };
 
-module.exports = { getAllEvent };
+const postCertificate = async (req, res) => {
+  const certificate = req.body.file;
+
+  try {
+    await Event.create({
+      certificate,
+    });
+    res.status(200).json({
+      message: "terserah",
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { getAllEvent, postCertificate };

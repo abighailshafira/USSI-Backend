@@ -17,7 +17,6 @@ module.exports = (sequelize, DataTypes) => {
       profileId: DataTypes.INTEGER,
       DetailTrainingId: DataTypes.INTEGER,
       certificate: DataTypes.STRING,
-      desc: DataTypes.STRING,
       payment: DataTypes.STRING,
     },
     {

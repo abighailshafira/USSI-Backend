@@ -13,18 +13,23 @@ const getAllTraining = async (req, res) => {
 };
 
 const createTraining = async (req, res) => {
-  const { institutionName, trainingName, participant, attendance, month } = req.body;
+  const { trainingName, description, startDate, endDate, time, location, city, registrationDate } = req.body;
+  const img = req.body.file;
 
   try {
-    await Training.create({
-      institutionName,
+    await DetailTraining.create({
       trainingName,
-      participant,
-      attendance,
-      month,
+      description,
+      startDate,
+      endDate,
+      time,
+      location,
+      city,
+      img,
+      registrationDate,
     });
     res.status(200).json({
-      message: "terserah",
+      message: "Success create training",
     });
   } catch (error) {
     console.log(error);
@@ -65,7 +70,8 @@ const detailTrainingById = async (req, res) => {
 
 const updateTraining = async (req, res) => {
   const trainingId = req.params.id;
-  const { trainingName, description, startDate, endDate, location, city, img } = req.body;
+  const { trainingName, description, startDate, endDate, time, location, city, registrationDate } = req.body;
+  const img = req.body.file;
 
   try {
     const training = await DetailTraining.findOne({
@@ -76,8 +82,10 @@ const updateTraining = async (req, res) => {
       description,
       startDate,
       endDate,
+      time,
       location,
       city,
+      registrationDate,
       img,
     });
     res.status(200).json({
@@ -104,5 +112,24 @@ const deleteTraining = async (req, res) => {
     });
   }
 };
+
+// const training = async (req, res) => {
+//   const { institutionName, trainingName, participant, attendance, month } = req.body;
+
+//   try {
+//     await Training.create({
+//       institutionName,
+//       trainingName,
+//       participant,
+//       attendance,
+//       month,
+//     });
+//     res.status(200).json({
+//       message: "terserah",
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 module.exports = { getAllTraining, createTraining, detailTraining, detailTrainingById, updateTraining, deleteTraining };

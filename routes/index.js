@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
-const { register, login, logout } = require("../controller/authController");
+const { register, login, logout, getInstitution, getAdmin, updateAdmin, deleteAdmin } = require("../controller/authController");
 const { registration } = require("../controller/registrationController");
 const { getAllTraining, createTraining, detailTraining, detailTrainingById, updateTraining, deleteTraining } = require("../controller/trainingController");
-const { getAllEvent } = require("../controller/eventController");
+const { getAllEvent, postCertificate } = require("../controller/eventController");
 const { getAllInstitution, createInstitution, deleteInstitution, updateInstitution } = require("../controller/institutionController");
 
 let storage = multer.diskStorage({
@@ -21,16 +21,21 @@ let storage = multer.diskStorage({
 let upload = multer({ storage: storage });
 
 router.post("/register", register);
+router.get("/admin", getAdmin);
+router.put("/admin/:id", updateAdmin);
+router.delete("/admin/:id", deleteAdmin);
 router.post("/login", login);
 router.post("/logout", logout);
-router.post("/registration", registration);
+router.get("/manuk/:id", getInstitution);
+router.post("/registration", upload.single("image"), registration);
 router.get("/training", getAllTraining);
-router.post("/training", createTraining);
+router.post("/training", upload.single("img"), createTraining);
 router.get("/detail/training", detailTraining);
 router.get("/detail/training/:id", detailTrainingById);
-router.put("/detail/training/:id", updateTraining);
+router.put("/detail/training/:id", upload.single("img"), updateTraining);
 router.delete("/detail/training/:id", deleteTraining);
 router.get("/event", getAllEvent);
+router.post("/event", upload.single("certificate"), postCertificate);
 router.get("/institution", getAllInstitution);
 router.post("/institution", createInstitution);
 router.delete("/institution/:id", deleteInstitution);

@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
       this.hasOne(models.Profile, {
         foreignKey: "userId",
       });
+
+      this.belongsTo(models.Institution);
     }
   }
   User.init(
@@ -19,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       email: DataTypes.STRING,
       password: DataTypes.STRING,
       role: DataTypes.STRING,
+      institutionId: DataTypes.INTEGER,
     },
     {
       sequelize,
