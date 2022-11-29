@@ -3,13 +3,11 @@ const jwt = require("jsonwebtoken");
 const { User } = require("../models");
 
 const register = async (req, res) => {
-  const { institutionName, name, email, password, role } = req.body;
+  const { email, password, role } = req.body;
   const salt = await bcrypt.genSalt();
   const hashPassword = await bcrypt.hash(password, salt);
   try {
     await User.create({
-      institutionName,
-      name,
       email,
       password: hashPassword,
       role,
