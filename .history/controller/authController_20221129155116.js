@@ -10,8 +10,6 @@ const register = async (req, res) => {
   try {
     await User.create({
       institutionId,
-      name,
-      email,
       password: hashPassword,
     });
     res.status(201).json({

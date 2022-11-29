@@ -1,17 +1,15 @@
 const { Profile } = require("../models");
 
 const registration = async (req, res) => {
-  const { institutionName, institutionAddress, name, city, phone, payment } = req.body;
-  // const payment = req.body.file;
+  const { userId, city, phone, gender } = req.body;
+  const payment = req.body.file;
 
   try {
     await Profile.create({
-      institutionName,
-      institutionAddress,
-      name,
+      userId,
       city,
       phone,
-      // gender,
+      gender,
       payment,
     });
     res.status(200).json({

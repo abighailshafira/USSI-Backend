@@ -21,9 +21,7 @@ module.exports = {
       certificate: {
         type: Sequelize.STRING,
       },
-      desc: {
-        type: Sequelize.STRING,
-      },
+
       payment: {
         type: Sequelize.STRING,
       },

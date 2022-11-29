@@ -12,15 +12,6 @@ module.exports = {
       userId: {
         type: Sequelize.INTEGER,
       },
-      institutionName: {
-        type: Sequelize.STRING,
-      },
-      institutionAddress: {
-        type: Sequelize.STRING,
-      },
-      name: {
-        type: Sequelize.STRING,
-      },
       city: {
         type: Sequelize.STRING,
       },
@@ -28,6 +19,9 @@ module.exports = {
         type: Sequelize.STRING,
       },
       gender: {
+        type: Sequelize.STRING,
+      },
+      payment: {
         type: Sequelize.STRING,
       },
       createdAt: {
