@@ -8,10 +8,24 @@ const register = async (req, res) => {
   const salt = await bcrypt.genSalt();
   const hashPassword = await bcrypt.hash(password, salt);
   try {
+    const isEmailRegistered = await User.findOne({
+      where: {
+        email: email,
+      },
+    });
+    if (isEmailRegistered) {
+      res.status(409);
+      return res.json({
+        status: 409,
+        message: "Email already exist!",
+      });
+    }
+
     await User.create({
       institutionId,
       name,
       email,
+      role,
       password: hashPassword,
     });
     res.status(201).json({
@@ -35,6 +49,26 @@ const getAdmin = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
+  }
+};
+
+const getAdminById = async (req, res) => {
+  const userId = req.params.id;
+  try {
+    const admin = await User.findOne({
+      where: {
+        id: userId,
+      },
+    });
+    res.status(200).json({
+      message: "Success get detail",
+      statusCode: 200,
+      data: admin,
+    });
+  } catch (error) {
+    res.json({
+      message: error.message,
+    });
   }
 };
 
@@ -91,7 +125,6 @@ const login = async (req, res) => {
       const user = { id: userInfo.id, email: userInfo.email, role: userInfo.role };
 
       const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "1d" });
-      // const refreshToken = jwt.sign(user, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '1d' });
 
       res.cookie("accessToken", accessToken, {
         httpOnly: true,
@@ -148,4 +181,4 @@ const getInstitution = async (req, res) => {
   }
 };
 
-module.exports = { register, login, logout, getInstitution, getAdmin, updateAdmin, deleteAdmin };
+module.exports = { register, login, logout, getInstitution, getAdmin, updateAdmin, deleteAdmin, getAdminById };

@@ -12,6 +12,26 @@ const getAllInstitution = async (req, res) => {
   }
 };
 
+const getInstitutionById = async (req, res) => {
+  const institutionId = req.params.id;
+  try {
+    const detail = await Institution.findOne({
+      where: {
+        id: institutionId,
+      },
+    });
+    res.status(200).json({
+      message: "Success get detail",
+      statusCode: 200,
+      data: detail,
+    });
+  } catch (error) {
+    res.json({
+      message: error.message,
+    });
+  }
+};
+
 const createInstitution = async (req, res) => {
   const { code, institutionName, institutionAddress, province, email, phone, CPName, CPPhone, statusSLA } = req.body;
 
@@ -79,4 +99,4 @@ const deleteInstitution = async (req, res) => {
   }
 };
 
-module.exports = { getAllInstitution, createInstitution, deleteInstitution, updateInstitution };
+module.exports = { getAllInstitution, createInstitution, deleteInstitution, updateInstitution, getInstitutionById };

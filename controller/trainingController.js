@@ -14,7 +14,7 @@ const getAllTraining = async (req, res) => {
 
 const createTraining = async (req, res) => {
   const { trainingName, description, startDate, endDate, time, location, city, registrationDate } = req.body;
-  const img = req.body.file;
+  // const img = req.body.file;
 
   try {
     await DetailTraining.create({
@@ -25,7 +25,7 @@ const createTraining = async (req, res) => {
       time,
       location,
       city,
-      img,
+      // img,
       registrationDate,
     });
     res.status(200).json({
