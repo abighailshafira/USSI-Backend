@@ -1,4 +1,4 @@
-const { Event, Profile, DetailTraining } = require("../models");
+const { Event, Profile, DetailTraining, User, Institution } = require("../models");
 
 const getAllEvent = async (req, res) => {
   try {
@@ -7,6 +7,14 @@ const getAllEvent = async (req, res) => {
         {
           model: Profile,
           require: true,
+          include: {
+            model: User,
+            require: true,
+            include: {
+              model: Institution,
+              require: true,
+            },
+          },
         },
         {
           model: DetailTraining,
