@@ -46,4 +46,32 @@ const postCertificate = async (req, res) => {
   }
 };
 
-module.exports = { getAllEvent, postCertificate };
+const getEventById = async (req, res) => {
+  const {id} = req.params
+  try {
+    const event = await Event.findAll({
+      where: {
+        userId: id
+      },
+      
+      include: [
+        {
+          model: User,
+          require: true,
+        },
+        {
+          model: DetailTraining,
+          require: true,
+        },
+      ],
+    })
+    res.status(200).json({
+      message: "terserah",
+      data: event
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+module.exports = { getAllEvent, postCertificate, getEventById };

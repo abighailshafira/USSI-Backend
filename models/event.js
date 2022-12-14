@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       this.belongsTo(models.Profile);
       this.belongsTo(models.DetailTraining);
+      this.belongsTo(models.User);
     }
   }
   Event.init(
@@ -18,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       DetailTrainingId: DataTypes.INTEGER,
       certificate: DataTypes.STRING,
       payment: DataTypes.STRING,
+      userId: DataTypes.INTEGER
     },
     {
       sequelize,

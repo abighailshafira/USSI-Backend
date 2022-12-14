@@ -17,13 +17,13 @@ module.exports = (sequelize, DataTypes) => {
     {
       trainingName: DataTypes.STRING,
       description: DataTypes.STRING,
-      startDate: DataTypes.DATE,
-      endDate: DataTypes.DATE,
+      startDate: DataTypes.STRING,
+      endDate: DataTypes.STRING,
       time: DataTypes.STRING,
       location: DataTypes.STRING,
       city: DataTypes.STRING,
       img: DataTypes.STRING,
-      registrationDate: DataTypes.DATE,
+      registrationDate: DataTypes.STRING,
     },
     {
       sequelize,

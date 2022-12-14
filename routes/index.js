@@ -4,7 +4,7 @@ const multer = require("multer");
 const { register, login, logout, getInstitution, getAdmin, updateAdmin, deleteAdmin, getAdminById } = require("../controller/authController");
 const { getAllTraining, createTraining, detailTraining, detailTrainingById, updateTraining, deleteTraining } = require("../controller/trainingController");
 const { getAllInstitution, createInstitution, deleteInstitution, updateInstitution, getInstitutionById } = require("../controller/institutionController");
-const { getAllEvent, postCertificate } = require("../controller/eventController");
+const { getAllEvent, postCertificate, getEventById } = require("../controller/eventController");
 const { registration } = require("../controller/registrationController");
 
 let storage = multer.diskStorage({
@@ -51,6 +51,7 @@ router.delete("/detail/training/:id", deleteTraining);
 // Kegiatan
 router.get("/event", getAllEvent);
 router.post("/event", upload.single("certificate"), postCertificate);
+router.get("/event/:id", getEventById);
 
 // router.get("/training", getAllTraining);
 
