@@ -1,5 +1,7 @@
+// Kegiatan Peserta Controller
 const { Event, Profile, DetailTraining, User, Institution } = require("../models");
 
+// Get all data
 const getAllEvent = async (req, res) => {
   try {
     const events = await Event.findAll({
@@ -31,29 +33,15 @@ const getAllEvent = async (req, res) => {
   }
 };
 
-const postCertificate = async (req, res) => {
-  const certificate = req.body.file;
-
-  try {
-    await Event.create({
-      certificate,
-    });
-    res.status(200).json({
-      message: "terserah",
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
-
+// Get data by id
 const getEventById = async (req, res) => {
-  const {id} = req.params
+  const { id } = req.params;
   try {
     const event = await Event.findAll({
       where: {
-        userId: id
+        userId: id,
       },
-      
+
       include: [
         {
           model: User,
@@ -64,14 +52,29 @@ const getEventById = async (req, res) => {
           require: true,
         },
       ],
-    })
+    });
     res.status(200).json({
       message: "terserah",
-      data: event
-    })
+      data: event,
+    });
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
 
-module.exports = { getAllEvent, postCertificate, getEventById };
+// const postCertificate = async (req, res) => {
+//   const certificate = req.body.file;
+
+//   try {
+//     await Event.create({
+//       certificate,
+//     });
+//     res.status(200).json({
+//       message: "terserah",
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+module.exports = { getAllEvent, getEventById };

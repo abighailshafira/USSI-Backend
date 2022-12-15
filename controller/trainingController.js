@@ -1,17 +1,6 @@
+// Pelatihan Controller
 const { Training, DetailTraining } = require("../models");
 const training = require("../models/training");
-
-// Read data rekap pelatihan
-// const getAllTraining = async (req, res) => {
-//   try {
-//     await Training.findAll();
-//     res.status(200).json({
-//       message: "BISSSAAAA",
-//     });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
 
 const createTraining = async (req, res) => {
   const { trainingName, description, startDate, endDate, time, location, city, registrationDate } = req.body;

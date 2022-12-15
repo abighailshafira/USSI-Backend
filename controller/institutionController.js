@@ -1,5 +1,7 @@
+// Lembaga Controller
 const { Institution } = require("../models");
 
+// Get all data institution
 const getAllInstitution = async (req, res) => {
   try {
     const institution = await Institution.findAll();
@@ -12,6 +14,7 @@ const getAllInstitution = async (req, res) => {
   }
 };
 
+// Get data institution by id
 const getInstitutionById = async (req, res) => {
   const institutionId = req.params.id;
   try {
@@ -32,6 +35,7 @@ const getInstitutionById = async (req, res) => {
   }
 };
 
+// Add data institution
 const createInstitution = async (req, res) => {
   const { code, institutionName, institutionAddress, province, email, phone, CPName, CPPhone, statusSLA } = req.body;
 
@@ -55,6 +59,7 @@ const createInstitution = async (req, res) => {
   }
 };
 
+// Edit data institution
 const updateInstitution = async (req, res) => {
   const institutionId = req.params.id;
   const { code, institutionName, institutionAddress, province, email, phone, CPName, CPPhone, statusSLA } = req.body;
@@ -85,6 +90,7 @@ const updateInstitution = async (req, res) => {
   }
 };
 
+// Delete data institution
 const deleteInstitution = async (req, res) => {
   try {
     const institutionId = req.params.id;

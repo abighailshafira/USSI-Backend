@@ -8,6 +8,7 @@ const { registration } = require("../controller/registrationController");
 
 // Auth
 router.post("/register", register);
+router.get("/manuk/:id", getInstitution); // Get data lembaga ketika register
 router.post("/login", login);
 router.post("/logout", logout);
 router.get("/admin", getAdmin);
@@ -21,7 +22,6 @@ router.get("/institution", getAllInstitution);
 router.get("/institution/:id", getInstitutionById);
 // router.put("/institution/:id", updateInstitution);
 router.delete("/institution/:id", deleteInstitution);
-// router.get("/manuk/:id", getInstitution); // Gatau dipanggil dimana
 
 // Pendaftaran
 router.post("/registration", registration);

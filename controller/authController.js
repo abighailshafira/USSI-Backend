@@ -1,8 +1,10 @@
+// Auth controller
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { User, Institution } = require("../models");
 const jwtDecode = require("jwt-decode");
 
+// Register account
 const register = async (req, res) => {
   const { institutionId, name, email, password, role } = req.body;
   const salt = await bcrypt.genSalt();
@@ -36,80 +38,7 @@ const register = async (req, res) => {
   }
 };
 
-const getAdmin = async (req, res) => {
-  try {
-    const admin = await User.findAll({
-      where: {
-        role: "admin",
-      },
-    });
-    res.status(200).json({
-      message: "Success get all admin",
-      data: admin,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-const getAdminById = async (req, res) => {
-  const userId = req.params.id;
-  try {
-    const admin = await User.findOne({
-      where: {
-        id: userId,
-      },
-    });
-    res.status(200).json({
-      message: "Success get detail",
-      statusCode: 200,
-      data: admin,
-    });
-  } catch (error) {
-    res.json({
-      message: error.message,
-    });
-  }
-};
-
-const updateAdmin = async (req, res) => {
-  const userId = req.params.id;
-  const { name, email, password } = req.body;
-
-  try {
-    const admin = await User.findOne({
-      where: { id: userId },
-    });
-    await admin.update({
-      name,
-      email,
-      password,
-    });
-    res.status(200).json({
-      message: "Success update admin",
-      statusCode: 200,
-    });
-  } catch (error) {
-    res.json({
-      message: error.message,
-    });
-  }
-};
-
-const deleteAdmin = async (req, res) => {
-  try {
-    const userId = req.params.id;
-    await User.destroy({
-      where: { id: userId },
-    });
-    res.status(204).end();
-  } catch (error) {
-    res.json({
-      message: error.message,
-    });
-  }
-};
-
+// Login account
 const login = async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -142,6 +71,7 @@ const login = async (req, res) => {
   }
 };
 
+// Logout
 const logout = async (req, res) => {
   try {
     res.clearCookie("accessToken");
@@ -153,6 +83,7 @@ const logout = async (req, res) => {
   }
 };
 
+// Check email
 const isEmailRegistered = (value) => {
   return User.findOne({
     where: {
@@ -161,6 +92,85 @@ const isEmailRegistered = (value) => {
   });
 };
 
+// Get all data user
+const getAdmin = async (req, res) => {
+  try {
+    const admin = await User.findAll({
+      where: {
+        role: "admin",
+      },
+    });
+    res.status(200).json({
+      message: "Success get all admin",
+      data: admin,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// Get data user by id
+const getAdminById = async (req, res) => {
+  const userId = req.params.id;
+  try {
+    const admin = await User.findOne({
+      where: {
+        id: userId,
+      },
+    });
+    res.status(200).json({
+      message: "Success get detail",
+      statusCode: 200,
+      data: admin,
+    });
+  } catch (error) {
+    res.json({
+      message: error.message,
+    });
+  }
+};
+
+// Edit data user
+const updateAdmin = async (req, res) => {
+  const userId = req.params.id;
+  const { name, email, password } = req.body;
+
+  try {
+    const admin = await User.findOne({
+      where: { id: userId },
+    });
+    await admin.update({
+      name,
+      email,
+      password,
+    });
+    res.status(200).json({
+      message: "Success update admin",
+      statusCode: 200,
+    });
+  } catch (error) {
+    res.json({
+      message: error.message,
+    });
+  }
+};
+
+// Delete data user
+const deleteAdmin = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    await User.destroy({
+      where: { id: userId },
+    });
+    res.status(204).end();
+  } catch (error) {
+    res.json({
+      message: error.message,
+    });
+  }
+};
+
+// Read data institution
 const getInstitution = async (req, res) => {
   try {
     const institution = await Institution.findOne({
