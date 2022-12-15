@@ -1,20 +1,20 @@
 const { Training, DetailTraining } = require("../models");
 const training = require("../models/training");
 
-const getAllTraining = async (req, res) => {
-  try {
-    await Training.findAll();
-    res.status(200).json({
-      message: "BISSSAAAA",
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
+// Read data rekap pelatihan
+// const getAllTraining = async (req, res) => {
+//   try {
+//     await Training.findAll();
+//     res.status(200).json({
+//       message: "BISSSAAAA",
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 const createTraining = async (req, res) => {
   const { trainingName, description, startDate, endDate, time, location, city, registrationDate } = req.body;
-  // const img = req.body.file;
 
   try {
     await DetailTraining.create({
@@ -25,7 +25,6 @@ const createTraining = async (req, res) => {
       time,
       location,
       city,
-      // img,
       registrationDate,
     });
     res.status(200).json({
@@ -113,23 +112,4 @@ const deleteTraining = async (req, res) => {
   }
 };
 
-// const training = async (req, res) => {
-//   const { institutionName, trainingName, participant, attendance, month } = req.body;
-
-//   try {
-//     await Training.create({
-//       institutionName,
-//       trainingName,
-//       participant,
-//       attendance,
-//       month,
-//     });
-//     res.status(200).json({
-//       message: "terserah",
-//     });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
-module.exports = { getAllTraining, createTraining, detailTraining, detailTrainingById, updateTraining, deleteTraining };
+module.exports = { createTraining, detailTraining, detailTrainingById, updateTraining, deleteTraining };
