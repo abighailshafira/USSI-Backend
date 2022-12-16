@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       DetailTrainingId: DataTypes.INTEGER,
       certificate: DataTypes.STRING,
       payment: DataTypes.STRING,
-      userId: DataTypes.INTEGER
+      userId: DataTypes.INTEGER,
     },
     {
       sequelize,

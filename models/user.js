@@ -14,8 +14,8 @@ module.exports = (sequelize, DataTypes) => {
 
       this.belongsTo(models.Institution);
       this.hasMany(models.Event, {
-        foreignKey: "userId"
-      })
+        foreignKey: "userId",
+      });
     }
   }
   User.init(
