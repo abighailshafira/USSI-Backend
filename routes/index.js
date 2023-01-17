@@ -8,7 +8,7 @@ const { registration } = require("../controller/registrationController");
 
 // Auth
 router.post("/register", register);
-router.get("/manuk/:id", getInstitution); // Get data lembaga ketika register
+router.get("/institution/:id", getInstitution); // Get data lembaga ketika register
 router.post("/login", login);
 router.post("/logout", logout);
 router.get("/admin", getAdmin);
